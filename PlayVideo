@@ -1,0 +1,38 @@
+using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+
+public class CutScene : MonoBehaviour 
+{
+
+	public MovieTexture video;
+	public AudioClip videoSound;
+
+	public float time;
+	public string levelName;
+
+	private float cont;
+
+	// Use this for initialization
+	void Start () 
+	{
+		video.Play();
+		GetComponent<AudioSource>().PlayOneShot(videoSound);
+	}
+	
+	// Update is called once per frame
+	void Update () 
+	{
+		cont += Time.deltaTime;
+
+		if (cont > time)
+		{
+			UnityEngine.SceneManagement.SceneManager.LoadScene(levelName);
+		}
+	}
+
+	void OnGUI()
+	{
+		GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), video);
+	}
+}
